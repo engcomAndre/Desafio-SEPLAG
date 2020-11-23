@@ -1,5 +1,6 @@
 .table-row:focus {
     background: lightgreen;
+    color: white;
     outline: none;
   }
   .table-row:focus mat-cell {
@@ -7,11 +8,12 @@
   }
 
   .mat-row:hover {
-    background: lightgreen;
+    background: lightgray;    
     outline: none;
   }
-
 
   .mat-row:hover mat-cell {
     color: white; 
   }
+
+  

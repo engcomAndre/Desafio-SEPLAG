@@ -1,5 +1,7 @@
+import { ChangeDetectorRef } from '@angular/core';
 import { Component, OnInit } from '@angular/core';
 import { Beneficiario } from 'src/app/shared/model/beneficiario.model';
+import { BeneficiarioService } from 'src/app/shared/service/beneficiario.service';
 
 @Component({
   selector: 'app-beneficiario',
@@ -8,13 +10,16 @@ import { Beneficiario } from 'src/app/shared/model/beneficiario.model';
 })
 export class BeneficiarioComponent implements OnInit {
 
- 
+  public beneficiario: any;
 
-  constructor() { }
+  constructor(
+    private beneficiarioService : BeneficiarioService,    
+  ) { }
 
   ngOnInit(): void {
-
-
+    this.beneficiarioService.sbObsersable.subscribe(res => {
+      this.beneficiario = res;
+    });
   }
 
 }

@@ -3,5 +3,4 @@ export interface Beneficiario {
     cpf: string;
     orgao: string;
     matricula: string;
-
 }

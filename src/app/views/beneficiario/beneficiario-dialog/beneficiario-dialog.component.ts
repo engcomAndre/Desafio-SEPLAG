@@ -1,23 +1,33 @@
-import { Component, OnInit } from '@angular/core';
+import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
-import { MatDialogRef } from '@angular/material/dialog';
+import { MatDialogRef, throwMatDialogContentAlreadyAttachedError } from '@angular/material/dialog';
 import { Beneficiario } from 'src/app/shared/model/beneficiario.model';
 import { BeneficiarioService } from 'src/app/shared/service/beneficiario.service';
+
+interface Orgao {
+  nome: string;
+}
 
 @Component({
   selector: 'app-beneficiario-dialog',
   templateUrl: './beneficiario-dialog.component.html',
-  styleUrls: ['./beneficiario-dialog.component.css']
+  styleUrls: ['./beneficiario-dialog.component.css'],
+
 })
 export class BeneficiarioDialogComponent implements OnInit {
 
   public beneficiarioForm: FormGroup;
-
+  public orgaos: Orgao[] = [
+    { nome: 'Orgão 001' },
+    { nome: 'Orgão 002' },
+    { nome: 'Orgão 003' },
+    { nome: 'Orgão 004' }
+  ];
 
   constructor(
     public dialogRef: MatDialogRef<BeneficiarioDialogComponent>,
     private fb: FormBuilder,
-    private benficiarioService : BeneficiarioService
+    private beneficiarioService: BeneficiarioService
   ) { }
 
   ngOnInit(): void {
@@ -31,20 +41,21 @@ export class BeneficiarioDialogComponent implements OnInit {
       }
     );
   }
-  createBeneficiario(){
-    console.log("createBeneficiario");
 
-    // const novoBeneficiario =    
-
-    // this.benficiarioService.postBeneficiarios()
-
-
+  createBeneficiario() {
+    const beneficiario = {
+      'nome' : this.beneficiarioForm.value['nome'],
+      'cpf' : this.beneficiarioForm.value['cpf'],
+      'orgao' : this.beneficiarioForm.value['orgao'].nome,
+      'matricula' : this.beneficiarioForm.value['matricula'],
+    }
+   
+    this.beneficiarioService.postBeneficiarios(beneficiario);     
+    this.cancel();  
   }
 
   cancel(): void {
     this.dialogRef.close();
     this.beneficiarioForm.reset();
   }
-
-
 }

@@ -1,1 +1,34 @@
-<p>beneficiario works!</p>
+<div *ngIf="beneficiario" fxLayout="column" fxLayoutAlign="start stretch" style="margin: 10px 20px ;">
+
+    <div style="border: 1px solid lightgray;padding: 5px;">
+        <span>Dados do Beneficiário</span>
+
+        <div fxLayout="row" fxLayoutAlign="space-between center">
+            <label fxFlex="15">Nome:</label>
+            <mat-form-field fxFlex="80">
+                <input matInput value={{beneficiario.nome}} [readonly]="true">
+            </mat-form-field>
+        </div>
+        <div fxLayout="row" fxLayoutAlign="space-between center">
+
+            <label>Cpf: </label>
+            <mat-form-field fxFlex="80">
+                <input matInput value={{beneficiario.cpf}} [readonly]="true">
+            </mat-form-field>
+        </div>
+        <div fxLayout="row" fxLayoutAlign="space-between center">
+
+            <label>Orgão: </label>
+            <mat-form-field fxFlex="80">
+                <input matInput value={{beneficiario.orgao}} [readonly]="true">
+            </mat-form-field>
+        </div>
+
+        <div fxLayout="row" fxLayoutAlign="space-between center">
+            <label>Matrícula: </label>
+            <mat-form-field fxFlex="80">
+                <input matInput value={{beneficiario.matricula}} [readonly]="true">
+            </mat-form-field>
+        </div>
+    </div>
+</div>

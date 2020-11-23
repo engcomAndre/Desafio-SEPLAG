@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-home',
@@ -9,22 +10,38 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 export class HomeComponent implements OnInit {
   public LOGO = ("../../shared/assets/no_image.png");
 
-
-  // public servidorForm: FormGroup;
-
+  title = 'angular-material-tab-router';
+  navLinks: any[];
+  activeLinkIndex = -1;
 
   constructor(
+    private router: Router,
     private fb: FormBuilder
-  ) { }
+  ) {
+    this.navLinks = [
+      {
+        label: 'Processos',
+        link: './processos',
+        index: 0
+      }, {
+        label: 'Pecas',
+        link: './pecas',
+        index: 1
+      }, {
+        label: 'Movimentacoes',
+        link: './movimentacoes',
+        index: 2
+      },
+    ];
+
+  }
+
 
   ngOnInit(): void {
-    // this.servidorForm = this.fb.group({
-    //   servidorName: ['', [Validators.required]],
-    //   servidorCpf: ['', [Validators.required]],
-    //   servidorOrgao: ['', [Validators.required]],
-    //   servidorMatrícula: ['', [Validators.required]]
-      
-    // });
+    this.router.events.subscribe(() => {
+      this.activeLinkIndex = this.navLinks.indexOf(this.navLinks.find(tab => tab.link === '.' + this.router.url));
+  });
+    
   }
 
 }

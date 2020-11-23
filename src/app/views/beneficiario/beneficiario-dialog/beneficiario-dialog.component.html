@@ -13,25 +13,23 @@
             <mat-form-field>
                 <mat-label>CPF</mat-label>
                 <input matInput formControlName="cpf" name="cpf">
-            </mat-form-field>
-
-            <mat-form-field>
-                <mat-label>Orgão</mat-label>
-                <input matInput formControlName="orgao" name="orgao">
-            </mat-form-field>
+            </mat-form-field>           
 
             <mat-form-field>
                 <mat-label>Matrícula</mat-label>
                 <input matInput formControlName="matricula" name="matricula">
             </mat-form-field>
 
-            <mat-form-field>
-                <mat-label>Processo</mat-label>
-                <input matInput formControlName="processo" name="processo">
-            </mat-form-field>
+            <mat-form-field appearance="fill">
+                <mat-label>Orgãos</mat-label>
+                <mat-select formControlName="orgao" name="orgao" required>
+                  <mat-option>--</mat-option>
+                  <mat-option *ngFor="let orgao of orgaos" [value]="orgao">
+                    {{orgao.nome}}
+                  </mat-option>
+                </mat-select>
+              </mat-form-field>          
         </div>
-
-
     </form>
 </div>
 

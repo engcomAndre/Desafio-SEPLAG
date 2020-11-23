@@ -7,8 +7,6 @@
         <div>SEGPREV</div>
     </div>
 </div> -->
-
-
 <div style="margin: 25px 2% 0 2%;border: 1px solid gray;">
 
     <div style="margin: 0px 10px 0 10px;border: 1px solid black">
@@ -18,18 +16,17 @@
 
         <div fxLayout="row" fxLayoutAlign="start space-around">
             <div fxFlex="20" fxLayout="column" fxLayoutAlign="start space-around"
-                style="height: 450px; background: chartreuse;">
-                <button mat-raised-button color="primary">Primary</button>
-                <button mat-raised-button color="accent">Primary</button>
-                <button mat-raised-button color="primary">Primary</button>
+                style="height: auto; background: white;">
+
+                <app-beneficiario></app-beneficiario>
+                              
             </div>
 
             <mat-tab-group animationDuration="0ms" style="width: 100%;">
                 <mat-tab label="Beneficiário">
                     <app-beneficiariolista></app-beneficiariolista>
-
                 </mat-tab>
-                <mat-tab label="Processo">
+                <mat-tab label="Processo">                    
                     <app-processo></app-processo>
                 </mat-tab>
                 <mat-tab label="Peças">

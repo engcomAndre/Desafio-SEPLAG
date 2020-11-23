@@ -1,12 +1,14 @@
 import { Injectable } from '@angular/core';
 import { Beneficiario } from '../model/beneficiario.model';
-import { Observable, of } from 'rxjs';
+import { Observable, of, Subject } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
 })
 export class BeneficiarioService {
 
+  private sb = new Subject<Beneficiario>();
+  public sbObsersable = this.sb.asObservable();
 
   beneficiarios: Beneficiario[] = [
     { nome: "Ian Ricardo Viana", cpf: "52411684606", orgao: "Orgão 001", matricula: "418964865" },
@@ -26,15 +28,16 @@ export class BeneficiarioService {
 
   constructor() { }
 
-
-  getBeneficiarios(): Observable<Beneficiario[]> {
-    return Observable.create( (observer: { next: (arg0: Beneficiario[]) => void; complete: () => void; }) => {
-      observer.next(this.beneficiarios);
-      observer.complete();
-  });}
+  getSelectedBen(row : Beneficiario){
+    return this.sb.next(row);
   }
 
-  // postBeneficiarios(beneficiario: Beneficiario) {
-  //   this.beneficiarios.push(beneficiario);
-  // }
-// }
+  getBeneficiarios(): Observable<Beneficiario[]> {
+    return of<Beneficiario[]>(this.beneficiarios);
+  }
+
+  postBeneficiarios(beneficiario: Beneficiario) {
+    this.beneficiarios.push(beneficiario);
+    console.log(this.beneficiarios);
+  }
+}
