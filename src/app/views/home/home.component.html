@@ -1,18 +1,44 @@
-<div 
-    style= "
-        background : black;
-        height : 12%;
-        weight : 100%;
-    "
->
+<!-- <div fxLayout="row" fxLayoutAlign="start center" style="background: rgb(214, 122, 42);height: 100px;">
+    <span style="color:darkgreen;font-size: 8.2vh">SEGPREV</span>
+    <mat-divider vertical="true"></mat-divider>
+
+    <div fxLayout="column" fxLayoutAlign="start start" style="font-size: 2.5vh">
+        <div>SEGPREV</div>
+        <div>SEGPREV</div>
+    </div>
+</div> -->
+
+
+<div style="margin: 25px 2% 0 2%;border: 1px solid gray;">
+
+    <div style="margin: 0px 10px 0 10px;border: 1px solid black">
+        <div style="background: green;color: white;padding: 10px 10px 10px 10px ;font-size: large;margin: 0 0 10px 0;">
+            <span>Processo Virtual</span>
+        </div>
+
+        <div fxLayout="row" fxLayoutAlign="start space-around">
+            <div fxFlex="20" fxLayout="column" fxLayoutAlign="start space-around"
+                style="height: 450px; background: chartreuse;">
+                <button mat-raised-button color="primary">Primary</button>
+                <button mat-raised-button color="accent">Primary</button>
+                <button mat-raised-button color="primary">Primary</button>
+            </div>
+
+            <mat-tab-group animationDuration="0ms" style="width: 100%;">
+                <mat-tab label="Beneficiário">
+                    <app-beneficiariolista></app-beneficiariolista>
+
+                </mat-tab>
+                <mat-tab label="Processo">
+                    <app-processo></app-processo>
+                </mat-tab>
+                <mat-tab label="Peças">
+                    <app-pecas></app-pecas>
+                </mat-tab>
+                <mat-tab label="Movimentações">
+                    <app-movimentacoes></app-movimentacoes>
+                </mat-tab>
+            </mat-tab-group>
+        </div>
+    </div>
 </div>
-<mat-toolbar  style="
-                    background : light-blue;
-                    height:5%;
-                    weight:100%;">
-    <mat-toolbar-row >
-
-    </mat-toolbar-row>
-
-
-</mat-toolbar>

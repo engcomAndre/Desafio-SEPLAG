@@ -3,30 +3,66 @@ import { NgModule } from '@angular/core';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { HeaderComponent } from './views/header-component/header-component.component';
-import { Routes } from '@angular/router';
-import { HomeComponent } from './views/home/home.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { FooterComponent } from './views/footer/footer.component';
 import { MatToolbarModule } from '@angular/material/toolbar';
+import { MatIconModule } from '@angular/material/icon';
+import { MatButtonModule } from '@angular/material/button';
+import { MatTabsModule } from '@angular/material/tabs';
+import { MatCardModule } from '@angular/material/card';
+import { HomeComponent } from './views/home/home.component';
+import { MatSidenavModule } from '@angular/material/sidenav';
+import { MatInputModule } from '@angular/material/input';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { FlexLayoutModule } from '@angular/flex-layout';
 
-const routes: Routes = [
-  { path: '', component: HeaderComponent }
-];
+import { MatDividerModule } from '@angular/material/divider';
+import { BeneficiarioComponent } from './views/beneficiariolista/beneficiario/beneficiario.component';
+import { ProcessoComponent } from './views/processo/processo.component';
+import { PecasComponent } from './views/pecas/pecas.component';
+import { MovimentacoesComponent } from './views/movimentacoes/movimentacoes.component';
+import { BeneficiariolistaComponent } from './views/beneficiariolista/beneficiariolista.component';
+import { MatTableModule } from '@angular/material/table';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatMenuModule } from '@angular/material/menu';
+import { BeneficiarioDialogComponent } from './views/beneficiario/beneficiario-dialog/beneficiario-dialog.component';
+import { MatDialogModule } from '@angular/material/dialog';
+
+
 
 
 @NgModule({
   declarations: [
     AppComponent,
-    HeaderComponent,
     HomeComponent,
-    FooterComponent
+    BeneficiarioComponent,
+    ProcessoComponent,
+    PecasComponent,
+    MovimentacoesComponent,
+    BeneficiariolistaComponent,
+    BeneficiarioDialogComponent,
+
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     BrowserAnimationsModule,
-    MatToolbarModule
+    MatToolbarModule,
+    MatIconModule,
+    MatButtonModule,
+    MatTabsModule,
+    MatCardModule,
+    MatSidenavModule,
+    MatInputModule,
+    FormsModule,
+    ReactiveFormsModule,
+    FlexLayoutModule,
+    MatDividerModule,
+    MatFormFieldModule,
+    MatTableModule,
+    MatMenuModule,
+    MatDialogModule
+
+
   ],
   providers: [],
   bootstrap: [AppComponent]
