@@ -1,0 +1,41 @@
+<h1 mat-dialog-title>Novo Beneficio</h1>
+
+
+<div mat-dialog-content>
+    <form [formGroup]="beneficiarioForm">
+        <div fxLayout="column" fxLayoutAlign="space-around start">
+
+            <mat-form-field>
+                <mat-label>Nome do Beneficiário</mat-label>
+                <input matInput formControlName="nome" name="nome" style="width: 80%;">
+            </mat-form-field>
+
+            <mat-form-field>
+                <mat-label>CPF</mat-label>
+                <input matInput formControlName="cpf" name="cpf">
+            </mat-form-field>
+
+            <mat-form-field>
+                <mat-label>Orgão</mat-label>
+                <input matInput formControlName="orgao" name="orgao">
+            </mat-form-field>
+
+            <mat-form-field>
+                <mat-label>Matrícula</mat-label>
+                <input matInput formControlName="matricula" name="matricula">
+            </mat-form-field>
+
+            <mat-form-field>
+                <mat-label>Processo</mat-label>
+                <input matInput formControlName="processo" name="processo">
+            </mat-form-field>
+        </div>
+
+
+    </form>
+</div>
+
+<div mat-dialog-actions>
+    <button mat-raised-button color="primary" (click)="createBeneficiario()">Adicionar</button>
+    <button mat-button (click)="cancel()">Cancelar</button>
+</div>
