@@ -29,6 +29,7 @@ export class BeneficiarioService {
   constructor() { }
 
   getSelectedBen(row : Beneficiario){
+    console.log("getSelectedBen",row);
     return this.sb.next(row);
   }
 

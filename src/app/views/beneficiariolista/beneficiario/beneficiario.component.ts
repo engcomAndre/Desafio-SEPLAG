@@ -19,6 +19,7 @@ export class BeneficiarioComponent implements OnInit {
   ngOnInit(): void {
     this.beneficiarioService.sbObsersable.subscribe(res => {
       this.beneficiario = res;
+      console.log("beneficiario",res);
     });
   }
 
