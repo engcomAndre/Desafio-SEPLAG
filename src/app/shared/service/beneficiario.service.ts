@@ -1,14 +1,20 @@
 import { Injectable } from '@angular/core';
 import { Beneficiario } from '../model/beneficiario.model';
 import { Observable, of, Subject } from 'rxjs';
+import { HttpClient } from '@angular/common/http';
 
 @Injectable({
   providedIn: 'root'
 })
 export class BeneficiarioService {
 
+  url = "https://desafio-seplag.firebaseio.com/beneficiarios.json";
+
   private sb = new Subject<Beneficiario>();
+  private sbList = new Subject<Beneficiario[]>();
+  
   public sbObsersable = this.sb.asObservable();
+  public sbListObsersable = this.sbList.asObservable();
 
   beneficiarios: Beneficiario[] = [
     { nome: "Ian Ricardo Viana", cpf: "52411684606", orgao: "Orgão 001", matricula: "418964865" },
@@ -26,18 +32,24 @@ export class BeneficiarioService {
   ];
 
 
-  constructor() { }
+  constructor(
+    private http : HttpClient
+  ) { }
 
-  getSelectedBen(row : Beneficiario){
+  getSelectedBeneficiario(row : Beneficiario){
     return this.sb.next(row);
   }
 
-  getBeneficiarios(): Observable<Beneficiario[]> {
-    return of<Beneficiario[]>(this.beneficiarios);
+  onChangeBeneficiario(){
+    return this.sbList.next([...this.beneficiarios]);
   }
 
-  postBeneficiarios(beneficiario: Beneficiario) {
+  getBeneficiarios(): Observable<Beneficiario[]> {
+    return this.http.get<Beneficiario[]>(this.url);
+  }
+
+  postBeneficiarios(beneficiario: Beneficiario):Observable<Beneficiario[]> {
     this.beneficiarios.push(beneficiario);
-    console.log(this.beneficiarios);
+    return this.http.put<Beneficiario[]>(this.url,this.beneficiarios);
   }
 }

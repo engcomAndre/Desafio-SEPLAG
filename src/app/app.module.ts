@@ -27,6 +27,7 @@ import { MatMenuModule } from '@angular/material/menu';
 import { BeneficiarioDialogComponent } from './views/beneficiario/beneficiario-dialog/beneficiario-dialog.component';
 import { MatDialogModule } from '@angular/material/dialog';
 import {MatSelectModule} from '@angular/material/select';
+import { HttpClientModule } from '@angular/common/http';
 
 
 
@@ -62,7 +63,8 @@ import {MatSelectModule} from '@angular/material/select';
     MatTableModule,
     MatMenuModule,
     MatDialogModule,
-    MatSelectModule
+    MatSelectModule,
+    HttpClientModule
 
 
   ],

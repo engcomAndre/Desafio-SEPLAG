@@ -16,16 +16,22 @@ export class BeneficiariolistaComponent implements OnInit {
   beneficiarios: Beneficiario[] = [ ];
 
   displayedColumns: string[] = ['nome', 'cpf', 'orgao', 'matricula', 'actions'];
+  
   dataSource = new MatTableDataSource(this.beneficiarios);
 
   constructor(
     public dialog: MatDialog,
     private beneficiarioService: BeneficiarioService
-
   ) { }
 
   ngOnInit(): void {
     this.getBeneficiarios();
+    this.beneficiarioService.sbListObsersable.subscribe(res =>{
+      this.beneficiarios = res;
+      console.log("ngiNit",this.beneficiarios);
+      this.dataSource = new MatTableDataSource(this.beneficiarios);
+    });   
+    
   }
 
   applyFilter(event: Event) {
@@ -35,14 +41,13 @@ export class BeneficiariolistaComponent implements OnInit {
 
   getBeneficiarios() {
     this.beneficiarioService.getBeneficiarios().subscribe(retBeneficiarioService => {
-      this.beneficiarios = [...retBeneficiarioService];
-      this.dataSource = new MatTableDataSource([...retBeneficiarioService]);
+      this.beneficiarios = retBeneficiarioService;
+      this.dataSource = new MatTableDataSource(this.beneficiarios);
     });
-
   }
 
-  initProcess(row: any) {
-    this.beneficiarioService.getSelectedBen(row);
+  selectBeneficiario(row: Beneficiario) {
+    this.beneficiarioService.getSelectedBeneficiario(row);
   }
 
   addBeneficiario() {
@@ -51,7 +56,8 @@ export class BeneficiariolistaComponent implements OnInit {
     });
 
     dialogRef.afterClosed().subscribe(result => {
-      this.getBeneficiarios();
+      
+     
     });
   }
 }

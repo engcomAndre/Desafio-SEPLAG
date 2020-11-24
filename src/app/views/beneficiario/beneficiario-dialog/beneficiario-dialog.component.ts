@@ -37,7 +37,6 @@ export class BeneficiarioDialogComponent implements OnInit {
         cpf: ['', [Validators.required]],
         orgao: ['', [Validators.required]],
         matricula: ['', [Validators.required]],
-        processo: ['', [Validators.required]],
       }
     );
   }
@@ -50,7 +49,9 @@ export class BeneficiarioDialogComponent implements OnInit {
       'matricula' : this.beneficiarioForm.value['matricula'],
     }
    
-    this.beneficiarioService.postBeneficiarios(beneficiario);     
+    this.beneficiarioService.postBeneficiarios(beneficiario).subscribe(res =>{
+      this.beneficiarioService.onChangeBeneficiario();
+    });     
     this.cancel();  
   }
 

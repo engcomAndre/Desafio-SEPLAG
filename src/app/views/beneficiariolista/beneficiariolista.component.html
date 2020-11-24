@@ -48,7 +48,7 @@
             </ng-container>
 
             <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-            <tr mat-row class="table-row" tabindex="1"*matRowDef="let row; columns: displayedColumns;" (click)="initProcess(row)"></tr>
+            <tr mat-row class="table-row" tabindex="1"*matRowDef="let row; columns: displayedColumns;" (click)="selectBeneficiario(row)"></tr>
 
             <!-- Row shown when there is no matching data. -->
             <tr class="mat-row" *matNoDataRow>

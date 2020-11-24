@@ -1,3 +1,4 @@
+import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable, of } from 'rxjs';
 import { ProcessoComponent } from 'src/app/views/processo/processo.component';
@@ -8,6 +9,9 @@ import { Processo } from '../model/processo.model';
 })
 export class ProcessoService {
 
+  url = "https://desafio-seplag.firebaseio.com/processo.json";
+
+
   processos: Processo[] = [
     { cfpBeneficiario: '1234578912', tipo: "Identidade", documento: "documento" },
     { cfpBeneficiario: '1234578912', tipo: "Identidade", documento: "documento" },
@@ -17,14 +21,15 @@ export class ProcessoService {
     { cfpBeneficiario: '1234578912', tipo: "Identidade", documento: "documento" },
   ];
 
-  constructor() { }
+  constructor(
+    private http: HttpClient
+  ) { }
 
   getProcessos() : Observable<Processo[]>{
-    return of<Processo[]>(this.processos);
+    return this.http.get<Processo[]>(this.url);
   }
 
   postProcesso(processo: Processo) {
-    this.processos.push(processo);
-    console.log(this.processos);
+    this.http.put(this.url,processo);
   }
 }
