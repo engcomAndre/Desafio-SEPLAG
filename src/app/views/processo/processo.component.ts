@@ -1,8 +1,10 @@
 import { Component, OnInit } from '@angular/core';
+import { MatDialog } from '@angular/material/dialog';
 import { MatTableDataSource } from '@angular/material/table';
 import { Processo } from 'src/app/shared/model/processo.model';
 import { BeneficiarioService } from 'src/app/shared/service/beneficiario.service';
 import { ProcessoService } from 'src/app/shared/service/processo.service';
+import { ProcessoDialogComponent } from './processo-dialog/processo-dialog.component';
 
 @Component({
   selector: 'app-processo',
@@ -18,6 +20,7 @@ export class ProcessoComponent implements OnInit {
 
 
   constructor(
+    public dialog: MatDialog,
     private processoService : ProcessoService,    
     private beneficiarioService : BeneficiarioService,
   ) { }
@@ -34,9 +37,7 @@ export class ProcessoComponent implements OnInit {
          this.processos = res;
          this.dataSource = new MatTableDataSource(this.processos);
        }
-     );  
-     console.log(this.processos);
-
+     ); 
 
   }
   applyFilter(event: Event) {
@@ -44,12 +45,27 @@ export class ProcessoComponent implements OnInit {
     this.dataSource.filter = filterValue.trim().toLowerCase();
   }
 
-  carregarArquivo(){
-    console.log("carregarArquivo");
+  getProcessos(){
+    this.processoService.getProcessos().subscribe(
+      res => {
+        this.processos = res;
+      }
+    );
   }
 
+ 
   visualizarArquivo(){
     console.log("visualizarArquivo");
+  }
+
+  addProcesso() {
+    const dialogRef = this.dialog.open(ProcessoDialogComponent, {
+      minWidth: '400px',
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      this.getProcessos();
+    });
   }
 
 }

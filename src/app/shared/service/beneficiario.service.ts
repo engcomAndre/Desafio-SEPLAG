@@ -36,7 +36,12 @@ export class BeneficiarioService {
     private http : HttpClient
   ) { }
 
+<<<<<<< HEAD
   getSelectedBeneficiario(row : Beneficiario){
+=======
+  getSelectedBen(row : Beneficiario){
+    console.log("getSelectedBen",row);
+>>>>>>> af027ad92295b3b583f4f0586ca67a8fc301c517
     return this.sb.next(row);
   }
 

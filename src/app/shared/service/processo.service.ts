@@ -1,7 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable, of } from 'rxjs';
-import { ProcessoComponent } from 'src/app/views/processo/processo.component';
 import { Processo } from '../model/processo.model';
 
 @Injectable({
@@ -9,7 +8,7 @@ import { Processo } from '../model/processo.model';
 })
 export class ProcessoService {
 
-  url = "https://desafio-seplag.firebaseio.com/processo.json";
+  url = "https://desafio-seplag.firebaseio.com/processos.json";
 
 
   processos: Processo[] = [
