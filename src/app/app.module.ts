@@ -18,7 +18,6 @@ import { FlexLayoutModule } from '@angular/flex-layout';
 import { MatDividerModule } from '@angular/material/divider';
 import { BeneficiarioComponent } from './views/beneficiariolista/beneficiario/beneficiario.component';
 import { ProcessoComponent } from './views/processo/processo.component';
-import { PecasComponent } from './views/pecas/pecas.component';
 import { MovimentacoesComponent } from './views/movimentacoes/movimentacoes.component';
 import { BeneficiariolistaComponent } from './views/beneficiariolista/beneficiariolista.component';
 import { MatTableModule } from '@angular/material/table';
@@ -41,7 +40,6 @@ import { ProcessoDialogComponent } from './views/processo/processo-dialog/proces
     HomeComponent,
     BeneficiarioComponent,
     ProcessoComponent,
-    PecasComponent,
     MovimentacoesComponent,
     BeneficiariolistaComponent,
     BeneficiarioDialogComponent,

@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { MatDialogRef } from '@angular/material/dialog';
 import { BeneficiarioService } from 'src/app/shared/service/beneficiario.service';
+import { OrgaoService } from 'src/app/shared/service/orgao.service';
 
 interface Orgao {
   nome: string;
@@ -16,17 +17,14 @@ interface Orgao {
 export class BeneficiarioDialogComponent implements OnInit {
 
   public beneficiarioForm: FormGroup;
-  public orgaos: Orgao[] = [
-    { nome: 'Orgão 001' },
-    { nome: 'Orgão 002' },
-    { nome: 'Orgão 003' },
-    { nome: 'Orgão 004' }
-  ];
+
+  public orgaos: Orgao[] = [];
 
   constructor(
     public dialogRef: MatDialogRef<BeneficiarioDialogComponent>,
     private fb: FormBuilder,
-    private beneficiarioService: BeneficiarioService
+    private beneficiarioService: BeneficiarioService,
+    private orgaoService: OrgaoService
   ) { }
 
   ngOnInit(): void {
@@ -38,20 +36,24 @@ export class BeneficiarioDialogComponent implements OnInit {
         matricula: ['', [Validators.required]],
       }
     );
+    
+    this.orgaoService.getOrgaos().subscribe(res => {
+      this.orgaos = res;
+    })
   }
 
   createBeneficiario() {
     const beneficiario = {
-      'nome' : this.beneficiarioForm.value['nome'],
-      'cpf' : this.beneficiarioForm.value['cpf'],
-      'orgao' : this.beneficiarioForm.value['orgao'].nome,
-      'matricula' : this.beneficiarioForm.value['matricula'],
+      'nome': this.beneficiarioForm.value['nome'],
+      'cpf': this.beneficiarioForm.value['cpf'],
+      'orgao': this.beneficiarioForm.value['orgao'].nome,
+      'matricula': this.beneficiarioForm.value['matricula'],
     }
-   
-    this.beneficiarioService.postBeneficiarios(beneficiario).subscribe(res =>{
+
+    this.beneficiarioService.postBeneficiarios(beneficiario).subscribe(res => {
       this.beneficiarioService.onChangeBeneficiario();
-    });     
-    this.cancel();  
+    });
+    this.cancel();
   }
 
   cancel(): void {

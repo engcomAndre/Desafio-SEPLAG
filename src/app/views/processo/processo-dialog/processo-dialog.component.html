@@ -5,47 +5,52 @@
     <form [formGroup]="processoForm">
         <div fxLayout="column" fxLayoutAlign="space-around start">
 
-            <mat-form-field>
-                <mat-label>CPF do Beneficiário</mat-label>
-                <input matInput formControlName="cfpBeneficiario" name="cfpBeneficiario" style="width: 80%;">
-            </mat-form-field>
 
-            <mat-form-field>
+            <mat-form-field appearance="fill">
                 <mat-label>Tipo</mat-label>
-                <input matInput formControlName="tipo" name="tipo">
+                <mat-select formControlName="tipo" name="tipo" required>
+                    <mat-option>--</mat-option>
+                    <mat-option *ngFor="let tipo of tipoDocumentos" [value]="tipo">
+                        {{tipo}}
+                    </mat-option>
+                </mat-select>
             </mat-form-field>
 
             <mat-form-field>
                 <mat-label>Documento</mat-label>
                 <input matInput formControlName="documento" name="documento">
             </mat-form-field>
-            
+
+            <!-- <div *ngIf="!files.length" class="col-12 rmpm dropzone"  formControlName="arquivo" name="arquivo" value="arquivo" appDrag (files)="filesDropped($event)">
+                <div class="text-wrapper">
+                    <div class="centered">Drop your file here!</div>
+                </div>
+            </div> -->
+
+            <div fxLayout="row" fxLayoutAlign="space-around center" style="margin: 10px;">
+                <input type="file" formControlName="arquivo" name="arquivo" value="arquivo">
+            </div>
+
         </div>
 
     </form>
 </div>
 
+<!-- <div *ngIf="!files.length" class="col-12 rmpm dropzone" appDrag (files)="filesDropped($event)">
+    <div class="text-wrapper">
+        <div class="centered">Drop your file here!</div>
+    </div>
+</div> -->
 
-<div>
+<!-- <div fxLayout="row" fxLayoutAlign="space-around center" style="margin: 10px;">
+    <input type="file">
+</div> -->
+
+
+<div fxLayout="row" fxLayoutAlign="end end">
     <div mat-dialog-actions>
         <button mat-raised-button color="primary" (click)="createProcesso()">Adicionar</button>
         <button mat-button (click)="cancel()">Cancelar</button>
     </div>
 
-
-
-    <div *ngIf="!files.length" class="col-12 rmpm dropzone" appDrag (files)="filesDropped($event)">
-        <div class="text-wrapper">
-            <div class="centered">Drop your file here!</div>
-        </div>
-    </div>
-    <!--droped image preview-->
-    <div *ngFor="let file of files">
-        <span>{{file.url}}</span>
-        <!-- <pdf-viewer [src]="getResource(file.url)" [render-text]="true" style="display: block;"></pdf-viewer> -->
-        <embed [attr.src]="file.url" type="application/pdf"   height="700px" width="500">
-
-    </div>
-
-    <button type="button" (click)="upload()">Upload Image</button>
 </div>

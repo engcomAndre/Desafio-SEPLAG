@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { MatTableDataSource } from '@angular/material/table';
+import { Beneficiario } from 'src/app/shared/model/beneficiario.model';
 import { Processo } from 'src/app/shared/model/processo.model';
 import { BeneficiarioService } from 'src/app/shared/service/beneficiario.service';
 import { ProcessoService } from 'src/app/shared/service/processo.service';
@@ -13,39 +14,62 @@ import { ProcessoDialogComponent } from './processo-dialog/processo-dialog.compo
 })
 export class ProcessoComponent implements OnInit {
 
-  public beneficiario: any;
+  public beneficiario: Beneficiario;
   public processos: Processo[] = [];
-  displayedColumns: string[] = ['cpf','tipo','documento','acoes'];
+  displayedColumns: string[] = ['tipo', 'documento', 'acoes'];
   dataSource = new MatTableDataSource(this.processos);
 
 
   constructor(
     public dialog: MatDialog,
-    private processoService : ProcessoService,    
-    private beneficiarioService : BeneficiarioService,
+    private processoService: ProcessoService,
+    private beneficiarioService: BeneficiarioService,
   ) { }
 
   ngOnInit(): void {
-    this.beneficiarioService.sbObsersable.subscribe(res => {
-      this.beneficiario = res;
+    this.processoService.sbListObsersable.subscribe(resProcessos => {
+      this.processos = resProcessos.filter(r => {
+        return r.cfpBeneficiario === this.beneficiario.cpf;
+      });
+      this.dataSource = new MatTableDataSource(this.processos);
     });
 
-    console.log(this.beneficiario);
+    this.beneficiarioService.sbObsersable.subscribe(res => {
+      this.beneficiario = res;
 
-     this.processoService.getProcessos().subscribe(
-       res => {
-         this.processos = res;
-         this.dataSource = new MatTableDataSource(this.processos);
-       }
-     ); 
+      if (this.beneficiario) {
+        this.processoService.getProcessos().subscribe(
+          resProcessos => {
+            if (resProcessos) {
+              this.processos = resProcessos.filter(r => {
+                return r.cfpBeneficiario === this.beneficiario.cpf;
+              });
+              this.dataSource = new MatTableDataSource(this.processos);
+            }
+          }
+        );
+      }
+      else {
+        this.processoService.getProcessos().subscribe(
+          resProcessos => {
+            this.processos = resProcessos;
+            this.dataSource = new MatTableDataSource(this.processos);
+          }
+        );
+      }
+    });
+    this.dataSource = new MatTableDataSource(this.processos);
+
+
 
   }
+
   applyFilter(event: Event) {
     const filterValue = (event.target as HTMLInputElement).value;
     this.dataSource.filter = filterValue.trim().toLowerCase();
   }
 
-  getProcessos(){
+  getProcessos() {
     this.processoService.getProcessos().subscribe(
       res => {
         this.processos = res;
@@ -53,18 +77,20 @@ export class ProcessoComponent implements OnInit {
     );
   }
 
- 
-  visualizarArquivo(){
+  visualizarArquivo() {
     console.log("visualizarArquivo");
   }
 
   addProcesso() {
     const dialogRef = this.dialog.open(ProcessoDialogComponent, {
       minWidth: '400px',
+      data: { beneficiarioCpf: this.beneficiario.cpf }
     });
 
     dialogRef.afterClosed().subscribe(result => {
-      this.getProcessos();
+      this.processoService.sbListObsersable.subscribe(res => {
+        this.processos = res;
+      });
     });
   }
 

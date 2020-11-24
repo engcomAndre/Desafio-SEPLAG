@@ -1,5 +1,6 @@
 export interface Processo {
     cfpBeneficiario:string;
     tipo: string;   
-    documento : string;            
+    documento : string; 
+    arquivo : any;           
 }

@@ -34,10 +34,8 @@ export class BeneficiariolistaComponent implements OnInit {
       this.beneficiarios = res;
       console.log("ngiNit",this.beneficiarios);
       this.dataSource = new MatTableDataSource(this.beneficiarios);
-    });   
-    
+    });       
   }
-
 
   applyFilter(event: Event) {
     const filterValue = (event.target as HTMLInputElement).value;

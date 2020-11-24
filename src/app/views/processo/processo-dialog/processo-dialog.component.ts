@@ -1,9 +1,16 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Inject, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
-import { MatDialogRef } from '@angular/material/dialog';
+import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { DomSanitizer } from '@angular/platform-browser';
 import { FileHandle } from 'src/app/shared/dragDrop.directive';
+import { Beneficiario } from 'src/app/shared/model/beneficiario.model';
+import { BeneficiarioService } from 'src/app/shared/service/beneficiario.service';
 import { ProcessoService } from 'src/app/shared/service/processo.service';
+
+
+export interface DialogData {
+  beneficiarioCpf: string;
+}
 
 @Component({
   selector: 'app-processo-dialog',
@@ -12,7 +19,17 @@ import { ProcessoService } from 'src/app/shared/service/processo.service';
 })
 export class ProcessoDialogComponent implements OnInit {
 
+  beneficiario: Beneficiario;
+
   public processoForm: FormGroup;
+
+  public tipoDocumentos: string[] = [
+    "Identificação",
+    "Vida Funcional",
+    "Contagem de tempo",
+    "Remuneração/ Proventos"
+  ];
+
   file: string;
 
   name = 'Angular 5';
@@ -20,30 +37,27 @@ export class ProcessoDialogComponent implements OnInit {
 
   filesDropped(files: FileHandle[]): void {
     this.files = files;
-    
-   
   }
 
   constructor(
     public dialogRef: MatDialogRef<ProcessoDialogComponent>,
+    @Inject(MAT_DIALOG_DATA) public data: DialogData,
     private fb: FormBuilder,
     private processoService: ProcessoService,
     private domSanitizer: DomSanitizer
   ) { }
 
+
   upload(): void {
-    //get image upload file obj;
-    console.log(this.files);
-    this.processoService.postProcesso(this.files).subscribe();
+    this.processoService.postFile(this.files);
   }
 
   getResource(url: string) {
-     return this.domSanitizer.bypassSecurityTrustUrl(URL.createObjectURL(url));  
+    return this.domSanitizer.bypassSecurityTrustUrl(URL.createObjectURL(url));
   }
 
-
-
   ngOnInit(): void {
+ 
     this.processoForm = this.fb.group(
       {
         cfpBeneficiario: ['', [Validators.required]],
@@ -52,22 +66,22 @@ export class ProcessoDialogComponent implements OnInit {
         arquivo: ['', [Validators.required]]
       }
     );
+
+  
   }
-
-
-
-
 
   createProcesso() {
     const processo = {
-      'cfpBeneficiario': this.processoForm.value['cfpBeneficiario'],
+      'cfpBeneficiario': this.data.beneficiarioCpf,
       'tipo': this.processoForm.value['tipo'],
-      'documento': this.processoForm.value['documento']
+      'documento': this.processoForm.value['documento'],
+      'arquivo': this.processoForm.value['arquivo']      
     }
 
     this.processoService.postProcesso(processo).subscribe(res => {
-      return ''
+      this.processoService.onChangeProcessos();
     });
+
     this.cancel();
   }
 
