@@ -26,8 +26,11 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatMenuModule } from '@angular/material/menu';
 import { BeneficiarioDialogComponent } from './views/beneficiario/beneficiario-dialog/beneficiario-dialog.component';
 import { MatDialogModule } from '@angular/material/dialog';
-import {MatSelectModule} from '@angular/material/select';
-
+import { MatSelectModule } from '@angular/material/select';
+import { ProcessoDialogComponent } from './views/processo/processo-dialog/processo-dialog.component';
+import { PdfViewerModule } from 'ng2-pdf-viewer';
+import { HttpClientModule } from '@angular/common/http';
+import { DragDirective } from './shared/dragDrop.directive';
 
 
 
@@ -41,6 +44,9 @@ import {MatSelectModule} from '@angular/material/select';
     MovimentacoesComponent,
     BeneficiariolistaComponent,
     BeneficiarioDialogComponent,
+    ProcessoDialogComponent,
+    DragDirective
+
 
   ],
   imports: [
@@ -62,7 +68,9 @@ import {MatSelectModule} from '@angular/material/select';
     MatTableModule,
     MatMenuModule,
     MatDialogModule,
-    MatSelectModule
+    MatSelectModule,
+    PdfViewerModule,
+    HttpClientModule
 
 
   ],

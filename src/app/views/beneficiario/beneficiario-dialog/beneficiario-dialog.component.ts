@@ -1,7 +1,6 @@
-import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
-import { MatDialogRef, throwMatDialogContentAlreadyAttachedError } from '@angular/material/dialog';
-import { Beneficiario } from 'src/app/shared/model/beneficiario.model';
+import { MatDialogRef } from '@angular/material/dialog';
 import { BeneficiarioService } from 'src/app/shared/service/beneficiario.service';
 
 interface Orgao {
