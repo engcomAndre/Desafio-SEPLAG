@@ -1,0 +1,51 @@
+<h1 mat-dialog-title>Nova Movimentação</h1>
+
+<div mat-dialog-content>
+
+    <form [formGroup]="movimentacaoForm">
+        <div fxLayout="column" fxLayoutAlign="space-around start">
+
+            <mat-form-field appearance="fill">
+                <mat-label>Origem</mat-label>
+                <mat-select formControlName="origem" name="origem" required>
+                    <mat-option>--</mat-option>
+                    <mat-option *ngFor="let orgao of orgaos" [value]="orgao">
+                        {{orgao.nome}}
+                    </mat-option>
+                </mat-select>
+            </mat-form-field>
+
+            <mat-form-field appearance="fill">
+                <mat-label>Destino</mat-label>
+                <mat-select formControlName="destino" name="destino" required>
+                    <mat-option>--</mat-option>
+                    <mat-option *ngFor="let orgao of orgaos" [value]="orgao">
+                        {{orgao.nome}}
+                    </mat-option>
+                </mat-select>
+            </mat-form-field>
+    
+
+        </div>
+
+    </form>
+</div>
+
+<!-- <div *ngIf="!files.length" class="col-12 rmpm dropzone" appDrag (files)="filesDropped($event)">
+    <div class="text-wrapper">
+        <div class="centered">Drop your file here!</div>
+    </div>
+</div> -->
+
+<!-- <div fxLayout="row" fxLayoutAlign="space-around center" style="margin: 10px;">
+    <input type="file">
+</div> -->
+
+
+<div fxLayout="row" fxLayoutAlign="end end">
+    <div mat-dialog-actions>
+        <button mat-raised-button color="primary" (click)="createMovimentacao()">Adicionar</button>
+        <button mat-button (click)="cancel()">Cancelar</button>
+    </div>
+
+</div>

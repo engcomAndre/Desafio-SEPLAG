@@ -12,16 +12,11 @@ import { BeneficiarioService } from 'src/app/shared/service/beneficiario.service
 })
 export class BeneficiariolistaComponent implements OnInit {
 
-
-
   beneficiarios: Beneficiario[] = [];
 
-
-  displayedColumns: string[] = ['nome', 'cpf', 'orgao', 'matricula', 'actions'];
+  displayedColumns: string[] = ['nome', 'cpf', 'orgao', 'matricula', 'acoes'];
   
   dataSource = new MatTableDataSource(this.beneficiarios);
-
-
 
   constructor(
     public dialog: MatDialog,

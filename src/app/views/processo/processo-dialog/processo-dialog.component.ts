@@ -9,6 +9,7 @@ import { ProcessoService } from 'src/app/shared/service/processo.service';
 
 
 export interface DialogData {
+  destino: any;
   beneficiarioCpf: string;
 }
 

@@ -1,0 +1,17 @@
+.table-row:focus {
+    background: lightgreen;
+    color: white;
+    outline: none;
+  }
+  .table-row:focus mat-cell {
+    color: white; 
+  }
+
+  .mat-row:hover {
+    background: lightgray;    
+    outline: none;
+  }
+
+  .mat-row:hover mat-cell {
+    color: white; 
+  }

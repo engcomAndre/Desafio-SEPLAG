@@ -31,6 +31,9 @@ import { HttpClientModule } from '@angular/common/http';
 import { MatSelectModule } from '@angular/material/select';
 import { DragDirective } from './shared/dragDrop.directive';
 import { ProcessoDialogComponent } from './views/processo/processo-dialog/processo-dialog.component';
+import { MovimentacoesDialogComponent } from './views/movimentacoes/movimentacoes-dialog/movimentacoes-dialog.component';
+import { LocalDateTimePipePipe } from './shared/pipe/local-date-time-pipe.pipe';
+import { MatProgressBarModule } from '@angular/material/progress-bar';
 
 
 
@@ -45,6 +48,8 @@ import { ProcessoDialogComponent } from './views/processo/processo-dialog/proces
     BeneficiarioDialogComponent,
     ProcessoDialogComponent,
     DragDirective,
+    MovimentacoesDialogComponent,
+    LocalDateTimePipePipe,
 
 
   ],
@@ -69,11 +74,12 @@ import { ProcessoDialogComponent } from './views/processo/processo-dialog/proces
     MatDialogModule,
     MatSelectModule,
     PdfViewerModule,
-    HttpClientModule
+    HttpClientModule,
+    MatProgressBarModule
 
 
   ],
-  providers: [],
+  providers: [LocalDateTimePipePipe],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

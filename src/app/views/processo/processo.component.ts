@@ -36,13 +36,12 @@ export class ProcessoComponent implements OnInit {
 
     this.beneficiarioService.sbObsersable.subscribe(res => {
       this.beneficiario = res;
-
       if (this.beneficiario) {
         this.processoService.getProcessos().subscribe(
           resProcessos => {
             if (resProcessos) {
               this.processos = resProcessos.filter(r => {
-                return r.cfpBeneficiario === this.beneficiario.cpf;
+                return r.cfpBeneficiario == this.beneficiario.cpf;
               });
               this.dataSource = new MatTableDataSource(this.processos);
             }
@@ -53,15 +52,11 @@ export class ProcessoComponent implements OnInit {
         this.processoService.getProcessos().subscribe(
           resProcessos => {
             this.processos = resProcessos;
-            this.dataSource = new MatTableDataSource(this.processos);
           }
         );
       }
     });
     this.dataSource = new MatTableDataSource(this.processos);
-
-
-
   }
 
   applyFilter(event: Event) {
