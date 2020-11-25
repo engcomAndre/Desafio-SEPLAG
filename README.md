@@ -43,17 +43,54 @@ processo_virtual_movimentacoes.jpg[LINK]
 • Descrever um manual de repasse de tecnologia e negócio.
 
 ## Tecnologias envolvidas
-
 * Angular 
+* Firebase
+* Npm
+* NodeJs
+* Typescript
 
 ## Instalação
 
-## Uso
+##### Clone o projecto com o seguinte comando:
+```
+git clone https://github.com/engcomAndre/Desafio-SEPLAG.git
+```
+
+##### Instale as dependencias do projeto com o comando:
+```
+npm install
+```
+##### Levante a aplicação com o comando:
+```
+ng serve 
+```
+##### Acesse o browser na endereço :
+```
+http://localhost:4200/
+```
+
+
+## Instalação com docker 
+
+##### Clone o projecto com o seguinte comando:
+```
+git clone https://github.com/engcomAndre/Desafio-SEPLAG.git
+```
+##### Realize o build do projeto:
+```
+docker build -t desafio-seplag .
+```
+##### Realize o deploy local do container do projeto com o comando:
+```
+docker run -d --name desafio-seplag -p 80:80  desafio-seplag
+```
+##### Acesse o browser na endereço :
+```
+http://localhost:8080/
+```
 
 ## Licensa
 [MIT](https://choosealicense.com/licenses/mit/)
-
-
 
 # DesafioSeplag
 
