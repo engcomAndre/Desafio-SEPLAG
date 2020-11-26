@@ -26,7 +26,6 @@ import { MatMenuModule } from '@angular/material/menu';
 import { BeneficiarioDialogComponent } from './views/beneficiario/beneficiario-dialog/beneficiario-dialog.component';
 import { MatDialogModule } from '@angular/material/dialog';
 
-import { PdfViewerModule } from 'ng2-pdf-viewer';
 import { HttpClientModule } from '@angular/common/http';
 import { MatSelectModule } from '@angular/material/select';
 import { DragDirective } from './shared/dragDrop.directive';
@@ -34,6 +33,9 @@ import { ProcessoDialogComponent } from './views/processo/processo-dialog/proces
 import { MovimentacoesDialogComponent } from './views/movimentacoes/movimentacoes-dialog/movimentacoes-dialog.component';
 import { LocalDateTimePipePipe } from './shared/pipe/local-date-time-pipe.pipe';
 import { MatProgressBarModule } from '@angular/material/progress-bar';
+import { environment } from 'src/environments/environment';
+import { AngularFireModule } from '@angular/fire';
+import { AngularFireStorageModule } from '@angular/fire/storage';
 
 
 
@@ -73,10 +75,11 @@ import { MatProgressBarModule } from '@angular/material/progress-bar';
     MatMenuModule,
     MatDialogModule,
     MatSelectModule,
-    PdfViewerModule,
     HttpClientModule,
-    MatProgressBarModule
-
+    MatProgressBarModule,
+    AngularFireModule.initializeApp(environment.firebaseConfig),
+    AngularFireStorageModule
+    
 
   ],
   providers: [LocalDateTimePipePipe],

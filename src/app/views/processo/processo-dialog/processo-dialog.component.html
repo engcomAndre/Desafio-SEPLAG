@@ -27,7 +27,7 @@
             </div> -->
 
             <div fxLayout="row" fxLayoutAlign="space-around center" style="margin: 10px;">
-                <input type="file" formControlName="arquivo" name="arquivo" value="arquivo">
+                <input type="file" formControlName="arquivo" name="arquivo" value="arquivo" (change)="loadFile($event)">
             </div>
 
         </div>

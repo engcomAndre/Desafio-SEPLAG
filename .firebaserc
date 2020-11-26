@@ -1,0 +1,11 @@
+{
+  "targets": {
+    "desafio-seplag": {
+      "hosting": {
+        "desafio-seplag": [
+          "desafio-seplag"
+        ]
+      }
+    }
+  }
+}

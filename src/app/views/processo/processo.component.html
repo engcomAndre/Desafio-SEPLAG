@@ -1,12 +1,10 @@
-<div fxLayout="column" fxLayoutAlign="start stretch" style="margin: 5px 10px 0 10px;">
-    <span>Sem Usuário selecionado!</span>
-</div>
+
 <div fxLayout="column" fxLayoutAlign="start stretch" style="margin: 5px 10px 0 10px;">
 
     <div fxLayout="row" fxLayoutAlign="space-between start">
-        <button mat-raised-button color="primary" (click)="addProcesso()" *ngIf="beneficiario">Novo Processo</button>
+        <button mat-raised-button color="primary" (click)="addProcesso()" >Novo Processo</button>
 
-        <mat-form-field style="width: 50%;" *ngIf="!processos">
+        <mat-form-field style="width: 50%;" >
             <mat-label>
                 <mat-icon>search</mat-icon>Filter
             </mat-label>
@@ -16,7 +14,7 @@
 
     <div style="overflow: auto;height: 450px;" >
 
-        <table mat-table [dataSource]="dataSource" class="mat-elevation-z8"  *ngIf="!processos"
+        <table mat-table [dataSource]="dataSource" class="mat-elevation-z8"  
             style="width: 100%;border: 1px solid lightgray;">
         
         

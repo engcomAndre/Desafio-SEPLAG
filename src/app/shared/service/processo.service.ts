@@ -1,12 +1,23 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable, of } from 'rxjs';
+import { from, Observable, of } from 'rxjs';
+import { switchMap } from 'rxjs/operators';
+
 import { Subject } from 'rxjs/internal/Subject';
 import { FileHandle } from '../dragDrop.directive';
 import { Processo } from '../model/processo.model';
+import { AngularFireStorage } from '@angular/fire/storage';
+
+
+
+export interface FilesUploadMetadata {
+  uploadProgress$: any;// Observable<number>;
+  downloadUrl$: Observable<string>;
+}
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
+
 })
 export class ProcessoService {
 
@@ -14,6 +25,13 @@ export class ProcessoService {
 
   private sbList = new Subject<Processo[]>();
   public sbListObsersable = this.sbList.asObservable();
+
+
+  httpOptions = {
+    headers: new HttpHeaders({
+      'Content-Type': 'application/pdf'
+    })
+  }
 
   processos: Processo[] = [
     // { cfpBeneficiario: '1234578912', tipo: "Identidade", documento: "documento", arquivo: "arquivo" },
@@ -26,8 +44,8 @@ export class ProcessoService {
 
   constructor(
     private http: HttpClient,
+    private storage: AngularFireStorage) { }
 
-  ) { }
 
   onChangeProcessos() {
     return this.sbList.next([...this.processos]);
@@ -41,11 +59,19 @@ export class ProcessoService {
 
     this.processos = [...this.processos, processo];
     console.log('DIALOG_PROCESSO', this.processos);
-    // return of<Processo[]>(this.processos);
-    return this.http.put(this.url, this.processos);
+
+    const file = processo.arquivo;
+    const filePath = processo.arquivo.name;
+    const ref = this.storage.ref(filePath);
+    const task = ref.put(file);
+
+    return this.http.put(this.url, this.processos,);
   }
+
+
 
   postFile(files: FileHandle[]): Observable<any> {
     return this.http.put(this.url, files);
   }
+
 }
